@@ -1,0 +1,42 @@
+@extends('layouts.app')
+
+@section('content')
+    <div class="row">
+        <div class="col-sm-8 offset-sm-2">
+            <h1 class="display-3">Add a contact</h1>
+            <div>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div><br/>
+                @endif
+
+                <form method="POST" action="{{route('update',$post->id)}}" enctype="multipart/form-data" >
+                    @csrf
+                    <div class="form-group">
+                        <label for="name"> Name:</label>
+                        <input type="text" class="form-control" name="name" value="{{$post->name}}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <textarea type="text" class="form-control" name="description" >{{$post->description}}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="image">Iamge:</label>
+                        <input type="file" name="image" value="{{$post->image}}"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary-outline"> Add </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+@endsection
+
+
+
+
